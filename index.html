@@ -630,6 +630,15 @@
       box-shadow: var(--shadow-card);
     }
 
+    /* 深色竹簡區內的強調字必須維持淺色，避免被全域 strong 顏色覆蓋 */
+    .bamboo-quote-box strong {
+      color: #FBF8F1;
+    }
+
+    .bamboo-quote-box .key-focus-chip strong {
+      color: #E7F2EE;
+    }
+
     .bamboo-label {
       font-size: 13px;
       font-weight: 800;
