@@ -825,6 +825,48 @@
       text-decoration: underline;
     }
 
+    /* 窄幅投影片：放大文字、增加行距，讓內容填滿畫面 */
+    @media (max-width: 980px) {
+      .hero-slide {
+        align-content: start;
+        gap: 18px;
+      }
+
+      .hero-content {
+        justify-content: flex-start;
+        gap: 18px;
+      }
+
+      .hero-title {
+        font-size: clamp(36px, 5.6vw, 58px);
+        line-height: 1.4;
+      }
+
+      .hero-subtitle {
+        font-size: clamp(20px, 2.9vw, 25px);
+        line-height: 1.95;
+      }
+
+      .info-card {
+        padding: 20px 22px;
+        gap: 12px;
+      }
+
+      .info-card h3 {
+        font-size: 21px;
+        line-height: 1.5;
+      }
+
+      .info-list {
+        gap: 12px;
+      }
+
+      .info-list li {
+        font-size: 18px;
+        line-height: 1.95;
+      }
+    }
+
     .matrix-wrap {
       flex: 1 1 auto;
       display: flex;
