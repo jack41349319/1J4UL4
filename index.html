@@ -1057,6 +1057,47 @@
       color: var(--ink-secondary);
     }
 
+    /* 決策矩陣總結頁：填滿版面、放大表格與核心原則文字 */
+    .summary-slide {
+      justify-content: flex-start;
+      gap: 16px;
+    }
+
+    .summary-slide .matrix-wrap {
+      flex: 0 0 auto;
+      justify-content: flex-start;
+    }
+
+    .summary-slide .matrix-table {
+      font-size: 19px;
+    }
+
+    .summary-slide .matrix-table th {
+      padding: 16px 17px;
+      font-size: 18px;
+      line-height: 1.55;
+    }
+
+    .summary-slide .matrix-table td {
+      padding: 16px 17px;
+      line-height: 1.95;
+    }
+
+    .summary-slide .principle-card {
+      padding: 18px 20px;
+      gap: 9px;
+    }
+
+    .summary-slide .principle-card h4 {
+      font-size: 20px;
+      line-height: 1.55;
+    }
+
+    .summary-slide .principle-card p {
+      font-size: 18px;
+      line-height: 2;
+    }
+
     /* 4. 課堂演練與計時器頁 */
     .workshop-grid {
       display: grid;
@@ -2020,7 +2061,7 @@
 
       if (slide.type === "vol1-summary") {
         return `
-          <div class="content-slide">
+          <div class="content-slide summary-slide">
             <div class="slide-header">
               <div class="slide-header-left">
                 <div class="chapter-kicker">卷一《敬強篇》・總結復盤</div>
