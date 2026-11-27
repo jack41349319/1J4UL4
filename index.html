@@ -211,13 +211,26 @@
     }
 
     html.fullscreen-active .topbar,
-    html.fullscreen-active .progress-track,
-    html.fullscreen-active .bottombar {
+    html.fullscreen-active .progress-track {
       display: none;
     }
 
     html.fullscreen-active .stage-wrapper {
-      padding: 0;
+      padding: 0 0 72px;
+    }
+
+    /* 全螢幕仍保留底部導覽，方便直接用滑鼠切換投影片 */
+    html.fullscreen-active .bottombar {
+      display: flex;
+      position: fixed;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 30;
+      min-height: 72px;
+      background: rgba(251, 248, 241, 0.96);
+      border-top: 1px solid var(--border-hairline);
+      box-shadow: 0 -4px 18px rgba(39, 66, 61, 0.12);
     }
 
     html.fullscreen-active .slide-frame {
