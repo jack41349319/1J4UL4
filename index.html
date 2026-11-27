@@ -655,9 +655,14 @@
     }
 
     .trans-row {
-      font-size: 15.5px;
-      line-height: 1.8;
+      font-size: clamp(18px, 1.25vw, 21px);
+      line-height: 2;
+      font-weight: 700;
       color: var(--ink-primary);
+    }
+
+    .trans-row strong {
+      font-weight: 900;
     }
 
     .trans-tag {
