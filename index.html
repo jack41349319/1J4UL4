@@ -204,6 +204,34 @@
       animation: slideFadeIn 0.32s ease;
     }
 
+    /* 全螢幕簡報：把畫面交給投影片，並由 JS 依目前視窗自動縮放 */
+    html.fullscreen-active,
+    html.fullscreen-active body {
+      overflow: hidden;
+    }
+
+    html.fullscreen-active .topbar,
+    html.fullscreen-active .progress-track,
+    html.fullscreen-active .bottombar {
+      display: none;
+    }
+
+    html.fullscreen-active .stage-wrapper {
+      padding: 0;
+    }
+
+    html.fullscreen-active .slide-frame {
+      border: 0;
+      border-radius: 0;
+      box-shadow: none;
+      overflow: hidden;
+    }
+
+    html.fullscreen-active .slide-frame > * {
+      max-width: none;
+      transform-origin: top left;
+    }
+
     /* 西晉古籍四角回紋裝飾 */
     .slide-frame::before,
     .slide-frame::after {
@@ -2319,6 +2347,37 @@
       }
     }
 
+    // 全螢幕時縮放整張投影片，讓內容完整落在視窗內，不需要垂直捲動。
+    function fitFullscreenSlide() {
+      const slide = slideContainer.firstElementChild;
+      if (!slide || !document.fullscreenElement) return;
+
+      slide.style.transform = "none";
+      slide.style.width = "100%";
+      slide.style.height = "auto";
+
+      requestAnimationFrame(() => {
+        const availableWidth = slideContainer.clientWidth;
+        const availableHeight = slideContainer.clientHeight;
+        const contentWidth = Math.max(slide.scrollWidth, availableWidth);
+        const contentHeight = Math.max(slide.scrollHeight, availableHeight);
+        const scale = Math.min(
+          1,
+          availableWidth / contentWidth,
+          availableHeight / contentHeight
+        );
+
+        slide.style.width = `${availableWidth / scale}px`;
+        slide.style.transform = `scale(${scale})`;
+      });
+    }
+
+    function updateFullscreenLayout() {
+      const active = Boolean(document.fullscreenElement);
+      document.documentElement.classList.toggle("fullscreen-active", active);
+      if (active) requestAnimationFrame(fitFullscreenSlide);
+    }
+
     function updateTimerUI() {
       const display = document.getElementById("timerDisplay");
       const btn = document.getElementById("timerStartPauseBtn");
@@ -2345,6 +2404,7 @@
       renderDotsAndToc();
       renderNotes(slide);
       bindSlideEvents();
+      if (document.fullscreenElement) requestAnimationFrame(fitFullscreenSlide);
     }
 
     function goToSlide(idx) {
@@ -2403,6 +2463,11 @@
       } catch (err) {
         // 預覽環境不支援全螢幕時安靜忽略
       }
+    });
+
+    document.addEventListener("fullscreenchange", updateFullscreenLayout);
+    window.addEventListener("resize", () => {
+      if (document.fullscreenElement) requestAnimationFrame(fitFullscreenSlide);
     });
 
     document.addEventListener("keydown", (e) => {
