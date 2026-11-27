@@ -929,6 +929,38 @@
       }
     }
 
+    /* 寬版桌面投影片：取消上下分散造成的大片留白 */
+    @media (min-width: 981px) {
+      .hero-content {
+        justify-content: flex-start;
+        gap: 24px;
+      }
+
+      .hero-title {
+        font-size: clamp(38px, 3.8vw, 54px);
+        line-height: 1.42;
+      }
+
+      .hero-subtitle {
+        font-size: clamp(19px, 1.6vw, 23px);
+        line-height: 1.95;
+      }
+
+      .info-card h3 {
+        font-size: 22px;
+        line-height: 1.5;
+      }
+
+      .info-list {
+        gap: 12px;
+      }
+
+      .info-list li {
+        font-size: 18px;
+        line-height: 1.95;
+      }
+    }
+
     .matrix-wrap {
       flex: 1 1 auto;
       display: flex;
